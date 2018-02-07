@@ -2,12 +2,16 @@
 This repository visualize traffic of Yellow Taxi Trip Data. [Link](https://nycrouting.herokuapp.com/)
 
 ### Raw Data
-Raw data is generated from [Socrata Developers](https://data.cityofnewyork.us/view/ba8s-jw6u) API. 
-API like this: `https://data.cityofnewyork.us/resource/2yzn-sicd.json`
+Raw data is generated from [Socrata Developers](https://data.cityofnewyork.us/view/ba8s-jw6u) API. `https://data.cityofnewyork.us/resource/2yzn-sicd.json`
 Filter and save data in this structure:
-| pickup_datetime | pickup_latitude | pickup_longitude | dropoff_latitude | dropoff_longitude |
-| --------------- |:---------------:| ----------------:|:----------------:| -----------------:|
-| Date            | String          | String           | String           | String            |
+```{
+    pickup_datetime: Date,
+    pickup_latitude: String,
+    pickup_longitude: String,
+    dropoff_latitude: String,
+    dropoff_longitude: String
+}
+```
 Data size: 933 rows
 
 ### Routes Data
