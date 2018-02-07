@@ -1,0 +1,60 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'OpenSans', sans-serif;
+}
+body {
+	font-size: 14px;
+	font-weight: 400;
+}
+
+#map{
+	height: 600px;
+}
+
+td, th {
+	text-align: center;
+    padding:5px;
+}
+
+.scrollTable {
+    width: 2000px;
+    background: #343a40;
+    overflow-x: scroll;
+}
+
+
+.scrollTable thead tr {
+	color: white;
+    display: block;
+    width: 100%;
+}
+.scrollTable thead th {
+    width: 250px;
+}
+.scrollTable thead th:nth-child(7) {
+    width: 1300px;
+}
+.scrollTable tbody td{
+	width: 285px;
+}
+.scrollTable tbody td:nth-child(7) {
+    width: 1300px;
+    text-align: left !important;
+}
+.scrollTable tbody tr:nth-child(odd){
+	background:#ffffff;
+}
+.scrollTable tbody tr:nth-child(even){
+	background:#eaeaea;
+}
+.scrollTable tbody {
+    width: 100%;
+    height: 500px;
+    overflow-y: auto;
+    display: block;
+}
+
+.wrapper {
+    overflow-x: auto;
+}

@@ -1,0 +1,158 @@
+<% include partials/header%>
+<div class="container">
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h2 class="display-3">Streets Data Map</h2>
+        <p class="lead">This is a map with datepicker that can filter date range and return streets information and the number of the taxi on the street. 
+        The routes are generated from the data which pickup_datetime is between 12/31/2015 11:30 PM and 12/31/2015 11:33 PM. 
+        And the routes date range is from <mark>12/31/2015 11:30 PM</mark> to <mark>01/01/2016 12:01 AM</mark>. (default map setting)</p>
+      </div>
+    </div>
+    <form action="/map" method="POST">
+        <div class="container">
+            <div class='col-md-4'>
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker6'>
+                        <input type='text' class="form-control" name="begin" id="dp1"/>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-4'>
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker7'>
+                        <input type='text' class="form-control" name="end" id="dp2"/>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-4'>
+                <input type="submit" value="Pull Data!" class="btn btn-default"> &nbsp &nbsp 6543 streets information in total
+            </div>
+        </div>
+    </form>
+    <div id="map"></div>
+        <h2 class="display-3">This is the routes table </h2>
+        932 rows in total
+    <div class="wrapper">
+    <table class="scrollTable">
+    <thead class="fixedHeader">
+        <tr>
+            <th>pickup_datetime</th>
+			<th>pickup_latitude</th>
+			<th>pickup_longitude</th>
+			<th>dropoff_latitude</th>
+			<th>dropoff_longitude</th>
+			<th>routes_info</th>
+			<th>routes_legs</th>
+			<th>alternateRoutes</th>
+        </tr>
+    </thead>
+    <tbody class="scrollContent">
+        <% routes.forEach(function(d){%>
+        	<tr>
+            	<td><%=d.pickup_datetime.substring(0,25) %></td>
+            	<td><%=d.pickup_latitude.substring(0, 9) %></td>
+            	<td><%=d.pickup_longitude.substring(0, 9) %></td>
+            	<td><%=d.dropoff_latitude.substring(0, 9) %></td>
+            	<td><%=d.dropoff_longitude.substring(0, 9) %></td>
+            	<td><%=d.routes[0].distance%>, <%=d.routes[0].timeInterval%></td>
+            	<td>
+                	<% for(var i = 0; i<d.routes[0].legs.length - 1; i++){%>
+                    	<% var l = d.routes[0].legs[i];%>
+                    	[ 
+                    	<% l.streets.forEach(function(street){%>
+                        	<%= street%>
+                    	<% });%> ], 
+                    	<%=l.timeInterval%> -->
+                	<% }%>
+                	Arrive
+            	</td>
+            	<td><%=d.routes.length-1 %></td>
+        	</tr>
+    	<% }); %>
+    </tbody>
+    </table>
+</div>
+    
+</div>
+    <script>
+        $(document).ready(function () {
+            
+            //date picker js
+            $(function () {
+                // var mindate = new Date("2015-12-31T23:30:03Z");
+                let mindate = parseTimestamp("2015-12-31T23:30:03Z");
+                // var maxdate = new Date("2016-01-01T00:00:39Z");
+                let maxdate = parseTimestamp("2016-01-01T00:01:00Z");
+                
+                $('#datetimepicker6').datetimepicker({
+                    defaultDate: mindate
+                });
+                $('#datetimepicker7').datetimepicker({
+                    defaultDate: maxdate,
+                    useCurrent: false //Important! See issue #1075
+                });
+                $("#datetimepicker6").on("dp.change", function (e) {
+                    $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+                });
+                $("#datetimepicker7").on("dp.change", function (e) {
+                    $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+                });
+                
+            });
+
+            initMap();
+        });
+        
+        
+        function parseTimestamp(timestampStr) {
+            return new Date(new Date(timestampStr).getTime() + (new Date().getTimezoneOffset() * 60 * 1000));
+        };
+            
+      function initMap() {
+        //40.730610,-73.935242 Center Coordinate of NYC
+        var data = <%- JSON.stringify(streets) %>;
+        var latLng = {lat: 40.730610, lng: -73.935242};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: latLng
+        });
+
+        // var coor = { uluru.lat, uluru.lng};
+            data.forEach(function(d){
+                if(Number(d.count) !== 0){
+                    var l = {lat: Number(d._id.startPoint.lat), lng: Number(d._id.startPoint.lng)};
+                    initMarkers(l, d._id.streets, d.count, map);
+                }
+            })
+        }
+        
+        function initMarkers(latLng, name, count, map){
+            var streets = name.join(",");
+            var contentString = "Street Name: " + streets + "</p>" +
+                                "Count: " + count;
+            var infowindow = new google.maps.InfoWindow({
+                 content: contentString
+            });
+            var marker = new google.maps.Marker({
+                position: latLng,
+                map: map
+            });
+            
+            marker.addListener('click', function() {
+                infowindow.open(map, marker);
+            });
+        }
+    
+    </script>
+    
+    
+    <!--Google Map API Key-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQrMltOowDu6EuaFlHCzsgzr8THHweTTM&callback=initMap">
+</script>
+<% include partials/footer%>

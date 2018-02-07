@@ -1,0 +1,27 @@
+{
+  "name": "nyc-balancing-traffic-routing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zishanfu/NYC-Balancing-Traffic-Routing.git"
+  },
+  "author": "Zishan Fu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zishanfu/NYC-Balancing-Traffic-Routing/issues"
+  },
+  "homepage": "https://github.com/zishanfu/NYC-Balancing-Traffic-Routing#readme",
+  "dependencies": {
+    "async": "^2.6.0",
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "mongoose": "^5.0.3",
+    "request": "^2.83.0"
+  }
+}
