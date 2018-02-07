@@ -15,9 +15,9 @@ Filter and save data in this structure:
 Data size: 933 rows
 
 ### Routes Data
-Using trip data above, searching routes based on open map services [mapquest] (https://developer.mapquest.com/).
-API like this: `http://www.mapquestapi.com/directions/v2/alternateroutes key=KEY&from=Denver,CO&to=Golden,CO&maxRoutes=2&timeOverage=100`
+Using trip data above, searching routes based on open map services [mapquest](https://developer.mapquest.com/) `http://www.mapquestapi.com/directions/v2/alternateroutes key=KEY&from=Denver,CO&to=Golden,CO&maxRoutes=2&timeOverage=100`
 User can specify the max number of alternate routes and percentage of the time overage.
+
 Reconstruct and save data in this structure:
 ```{
     pickup_datetime: String,
@@ -49,6 +49,7 @@ Reconstruct and save data in this structure:
 }
 ```
 Data size: 932 rows
+
 Begintime is same as pickup_datetime and it regard as the reference for the time taxi in certain street. Caculating InStreetTime based on begintime and the timeInterval in this streets.
 
 ### Streets Data
@@ -69,6 +70,12 @@ Data structure:
 Data size: 6543 rows
 
 ### Traffic Map
+Select date range on datepicker and click on marker to show the street name and the number of taxi on the street.
+[![traffic](/pic/traffic.png)](https://nycrouting.herokuapp.com/)
 
 ### Routes Table
+Scroll table to see routes information and the number of alternate routes. `routes_info` is trip distance and time interval.
+[![routes](/pic/routes.png)](https://nycrouting.herokuapp.com/)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
