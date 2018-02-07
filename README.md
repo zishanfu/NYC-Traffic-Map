@@ -3,6 +3,7 @@ This repository visualize traffic of Yellow Taxi Trip Data. [Link](https://nycro
 
 ### Raw Data
 Raw data is generated from [Socrata Developers](https://data.cityofnewyork.us/view/ba8s-jw6u) API. `https://data.cityofnewyork.us/resource/2yzn-sicd.json`
+
 Filter and save data in this structure:
 ```{
     pickup_datetime: Date,
@@ -16,6 +17,7 @@ Data size: 933 rows
 
 ### Routes Data
 Using trip data above, searching routes based on open map services [mapquest](https://developer.mapquest.com/) `http://www.mapquestapi.com/directions/v2/alternateroutes key=KEY&from=Denver,CO&to=Golden,CO&maxRoutes=2&timeOverage=100`
+
 User can specify the max number of alternate routes and percentage of the time overage.
 
 Reconstruct and save data in this structure:
@@ -71,7 +73,7 @@ Data size: 6543 rows
 
 ### Traffic Map
 Select date range on datepicker and click on marker to show the street name and the number of taxi on the street.
-[![traffic](/pic/traffic.png)](https://nycrouting.herokuapp.com/)
+[![Traffic](/pic/Traffic.png)](https://nycrouting.herokuapp.com/)
 
 ### Routes Table
 Scroll table to see routes information and the number of alternate routes. `routes_info` is trip distance and time interval.
