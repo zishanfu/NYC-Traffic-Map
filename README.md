@@ -1,4 +1,4 @@
-# NYC-Balancing-Traffic-Routing
+# NYC-Traffic-Map
 This repository visualizes traffic of Yellow Taxi Trip Data. [Link](https://nycrouting.herokuapp.com/)
 
 ### Raw Data
