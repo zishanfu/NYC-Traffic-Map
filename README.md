@@ -5,7 +5,8 @@ This repository visualizes traffic of Yellow Taxi Trip Data. [Link](https://nycr
 Raw data is generated from [Socrata Developers](https://data.cityofnewyork.us/view/ba8s-jw6u) API. `https://data.cityofnewyork.us/resource/2yzn-sicd.json`
 
 Filter and save data in this structure:
-```{
+```
+{
     pickup_datetime: Date,
     pickup_latitude: String,
     pickup_longitude: String,
@@ -21,7 +22,8 @@ Using trip data above, searching routes based on open map services [mapquest](ht
 The user can specify the max number of alternate routes and percentage of the time overage.
 
 Reconstruct and save data in this structure:
-```{
+```
+{
     pickup_datetime: String,
     pickup_latitude: String,
     pickup_longitude: String,
